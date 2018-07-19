@@ -10,8 +10,9 @@ Retrieve price history for selected cars on BSP Auto website.
 ## Parameters ##
 
 You can change some parameters in the script :
-* URL : Link to the rental car search (http://www.bsp-auto.com/fr/list.asp? with POST values in GET parameters)
-* voitures : Cars you are looking for in a Shell Array (index array is important)
+* `URL` : Link to the rental car search (http://www.bsp-auto.com/fr/list.asp? with POST values in GET parameters)
+* `voitures` : Cars you are looking for in a Shell Array (index array is important)
+* `current_price`: Current price of your car (manual entry). Pretty useful to make a clear view on your graph
 
 ## Files ##
 
