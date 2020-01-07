@@ -24,7 +24,7 @@ done
 
 # Set content
 for i in ${!voitures[@]} ; do
-  prix=`cat $dirname/bsp-auto.curl | grep -i -e "class=tit_modele>${voitures[$i]}" | head -1| grep -o -P "class=tarif>\K([0-9]*)"`
+  prix=`cat $dirname/bsp-auto.curl | grep -A1 -i -a "class=tit_modele>RENAULT TWINGO*" | head -2 | tail -1 | grep -o -P "class=tarif>\K([0-9]*)"`
   content="$content,$prix"
 done
 
