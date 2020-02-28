@@ -6,16 +6,16 @@ dirname=$(dirname `readlink -f $0`)
 header="date"
 content=""
 voitures=()
-voitures[0]="SEAT IBIZA*"
-voitures[1]="RENAULT CLIO*"
-voitures[2]="VW POLO*"
-voitures[3]="RENAULT CAPTUR GPS*"
-voitures[4]="PEUGEOT 208*"
-current_price=257
+voitures[0]="RENAULT MEGANE*"
+voitures[1]="BMW SERIE 2 ACTIVE TOURER*"
+voitures[2]="RENAULT KANGOO*"
+voitures[3]="PEUGEOT 3008*"
+voitures[4]="VW TOURAN*"
+current_price=198
 
-URL='http://www.bsp-auto.com/fr/list.asp?ag_depart=3327&ag_retour=3327&vu=0&date_a=24%2F03%2F2018&heure_a=15%3A30&date_d=04%2F04%2F2018&heure_d=15%3A00'
+URL='https://www.bsp-auto.com/fr/list.asp?pays=10&ag_depart=2715&date_a=10/05/2020&heure_a=14:00&ag_retour=2715&date_d=20/05/2020&heure_d=14:00&age=25&chkage=1'
 
-curl -o $dirname/bsp-auto.curl "$URL"
+curl -s -o $dirname/bsp-auto.curl "$URL"
 
 # Set header
 for i in ${!voitures[@]} ; do
@@ -24,7 +24,7 @@ done
 
 # Set content
 for i in ${!voitures[@]} ; do
-  prix=`cat $dirname/bsp-auto.curl | grep -A1 -i -a "class=tit_modele>RENAULT TWINGO*" | head -2 | tail -1 | grep -o -P "class=tarif>\K([0-9]*)"`
+  prix=`cat $dirname/bsp-auto.curl | grep -A1 -i -a "class=tit_modele>${voitures[$i]}" | head -2 | tail -1 | grep -o -P "class=tarif>\K([0-9]*)"`
   content="$content,$prix"
 done
 
