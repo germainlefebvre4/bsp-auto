@@ -50,7 +50,8 @@ These are some tracks to make a better script :
 
 ### Schedule the price collect ###
 ```
-echo "0/15 * * * * root /bin/bash /opt/bsp-auto/bsp-auto.sh" > /etc/cron.d/bsp-auto
+ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+echo "*/15 * * * * root /bin/bash /opt/bsp-auto/bsp-auto.sh" > /etc/cron.d/bsp-auto
 systemctl restart crond
 ```
 Becareful of the generated files because they will grow forever.
