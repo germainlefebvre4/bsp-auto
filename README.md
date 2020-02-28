@@ -50,13 +50,15 @@ These are some tracks to make a better script :
 
 ### Schedule the price collect ###
 ```
-echo "0,30 * * * * ec2-user /bin/bash /opt/bsp-auto/bsp-auto.sh" > /etc/cron.d/bsp-auto
+echo "0/15 * * * * root /bin/bash /opt/bsp-auto/bsp-auto.sh" > /etc/cron.d/bsp-auto
+systemctl restart crond
 ```
 Becareful of the generated files because they will grow forever.
 
 ### Expose the result on internet ###
 *This example is for Apache 2.4*
 ```
+yum install -y httpd
 mkdir /var/www/bsp-auto
 ln -sf /opt/bsp-auto/bsp-auto /var/www/bsp-auto/bsp-auto
 chown -R  apache:apache /var/www/bsp-auto
@@ -72,7 +74,7 @@ cat << EOF > /etc/httpd/conf.d/virtualhost.conf
 
 </VirtualHost>
 EOF
-service httpd restart
+systemctl restart httpd
 ```
 
 ### Import in Google Spreadsheet ###
